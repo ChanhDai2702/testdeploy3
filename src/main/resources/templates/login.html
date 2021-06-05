@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	layout:decorator="layout">
+<head>
+<title>Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../static/css/login.css" th:href="@{/css/login.css}"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link th:rel="stylesheet"
+	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css} " />
+	<link rel="shortcut icon" th:href="@{images/icon_login.png}"/>
+</head>
+<body class="container">
+	<div class="vertical-center">
+		<div class="user_card">
+			<form action="home" th:action="@{/login}" method="post">
+				<div class="d-flex justify-content-center top-form">
+					<h3 class="title_form">Login</h3>
+				</div>
+				<div class="d-flex justify-content-center input-group">
+					<div class="brand_contain">
+						<img src="../static/images/man.png" width="1000"
+							th:src="@{images/man.png}" class="brand_logo" alt="Logo" />
+					</div>
+				</div>
+				<div class="d-flex justify-content-center input-group">
+					<input type="text" class="form-control" name="username"
+						placeholder="Username" />
+				</div>
+				<div class="d-flex justify-content-center input-group">
+					<input type="password" class="form-control" name="password"
+						placeholder="Password" />
+				</div>
+				<div class="d-flex justify-content-center input-group">
+					<div th:if="${param.error}">
+						<span style="margin-bottom: 10px; color: red; font-size: 15px;">Invalid
+							username and Password.</span>
+					</div>
+				</div>
+				<div class="d-flex justify-content-center login_container">
+					<button type="submit" name="button" class="btn login_btn">Login</button>
+				</div>
+				<div class="d-flex justify-content-center input-group">
+					<a th:href="@{/register}" class="register_form">Create a New Account</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Lịch học sinh viên</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
+
+
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css"
+	rel="stylesheet" />
+
+
+
+</head>
+<body>
+		<div class="container" >
+	<!--wrapper start-->
+	<div class="wrapper">
+		<!--header menu start-->
+		<div class="header">
+			<div class="header-menu">
+				<div class="title">
+					Clyn<span>Teacher</span>
+				</div>
+				<div class="sidebar-btn">
+					<i class="fas fa-bars"></i>
+				</div>
+				<ul>
+					
+					<li><a class="fas fa-sign-out-alt fa-2x" th:attr="href='/j_spring_security_logout'"></a></li>
+				</ul>
+			</div>
+		</div>
+		<!--header menu end-->
+		<!--sidebar start-->
+				<div class="sidebar">
+				<div class="sidebar-menu">
+				<div class="profile" style="text-align: center">
+					<img th:src="@{/images/1.jpg}" alt="" />
+						<p th:utext="${sv?.masv}"></p>
+					<p th:utext="${sv?.tensv}"></p>
+				</div>
+				<ul>
+					<li class="item"><a th:href="@{/sinhvien/dashboard}" class="menu-btn"> <i
+							class="fas fa-desktop"></i><span>Dashboard</span>
+					</a></li>
+					<li class="item" id="thongtinhoctap"><a href="#thongtinhoctap"
+						class="menu-btn"> <i class="fas fa-graduation-cap"></i><span>Thông tin học tập
+								<i class="fas fa-chevron-down drop-down"></i>
+						</span>
+					</a>
+						<div class="sub-menu">
+							<a th:href="@{/lichhoc}"><i class="fas fa-calendar"></i><span>Xem lịch học</span></a>
+							<a th:href="@{/bangdiem}"><i class="fas fa-clipboard"></i><span>Xem điểm</span></a>
+						</div></li>
+					<li class="item" id="quanlihocphan"><a href="#quanlihocphan"
+						class="menu-btn"> <i class="fas fa-bookmark"></i><span>Quản lí học phần
+								<i class="fas fa-chevron-down drop-down"></i>
+						</span>
+					</a>
+						<div class="sub-menu">
+							<a th:href="@{/dkLHPChoSV}"><i class="fas fa-stream"></i><span>Đăng ký học phần</span></a>
+						</div></li>
+					<li class="item" id="settings"><a href="#settings"
+						class="menu-btn"> <i class="fas fa-search"></i><span>Tra cứu
+								<i class="fas fa-chevron-down drop-down"></i>
+						</span>
+					</a>
+						<div class="sub-menu">
+							<a th:href="@{/congnosinhvien}"><i class="fas fa-money-check-alt"></i><span>Tra cứu công nợ</span></a>
+							<a href="#"><i class="fas fa-language"></i><span>Khác</span></a>
+						</div></li>
+					<li class="item"><a href="#" class="menu-btn"> <i
+							class="fas fa-info-circle"></i><span>About</span>
+					</a></li>
+				</ul>
+			</div>
+		</div>
+		<!--sidebar end-->
+		<div>
+		<!--main container start-->
+		<div class="main-container">
+		
+		
+		<div class="card">
+			<div class="ui container">
+			
+			
+		
+			<div class="right" style="width:100%;">
+				<div class="info">
+				<h1 style="text-align: left;font-size:62px;font-weight:100;">Lịch dạy giảng viên</h1>
+				<br>
+				</div>
+				</div>
+				
+						<br>
+				<div style="display:flex;width:60%;margin-left:20%;margin-right:20%;justify-content: center;">
+				<form th:action="@{ngay}" name="test" th:method="post">
+								<input type="date" name="ngay" th:filed="${date}"
+									th:value="${date}" class="smallbtn-outline" >
+							</form>
+						<a th:href="@{luiday}" class="smallbtn-outline" style="width:20%;"><i class="fa fa-arrow-left" aria-hidden="true" style="margin-right:5px;"></i><span>Tuần Trước</span></a> 
+						<a th:href="@{lichday}" class="smallbtn-outline" style="width:20%;">Hiện tại</a> 
+						<a th:href="@{toiday}" class="smallbtn-outline" style="width:20%;"><span>Tuần tới</span><i class="fa fa-arrow-right" aria-hidden="true" style="margin-left:5px;"></i></a>
+				
+				</div>
+		<br>
+					
+							
+
+		
+		<table style="border: 1px black;" class="content-table"
+			width="100%">
+			<thead style="letter-spacing:0.1rem;font-size:1.1rem;padding:2.5% 2.5%;font-weight:500;width:100%;">
+				<tr role="row">
+					<td colspan="5" th:each="ntt,state:${ngaytrongtuan}"
+						th:utext="${ntt.Thu + '<br/>' +ntt.Ngay}"></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr role="row">
+					<td colspan="5" rowspan="10" th:each="ntt,state:${ngaytrongtuan}">
+						<div  class="content color-lichhoc text-left" data-bg="773124" th:each="lh,state:${lichhoc}">
+							<div th:if="${#strings.equals(lh.ngayhoc, ntt.Ngay)}">
+								<p style="background:#F0F8FF;border-radius:60px;box-shadow:0 5px 10px #e1e5ee;" 
+									th:utext="${'<br>' +lh?.tenmon +'<br/>'
+									+lh?.tenlophp +'<br/>'
+									+lh?.malhp +'<br>'
+									+'Tiết: '+lh?.tietbatdau
+									+'-' +lh?.tietketthuc + '<br/>'
+									+'Loại lịch: '+ lh?.loailich + '<br/>'
+									+'Trạng Thái: '+ lh?.trangthai}" />
+
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+		</div>
+<div class="card" style="background:#2F323A;color:white;font-weight:normal;font-size:22px;text-align: center;padding-left:0px;">
+					<div class="title" style="font-size:22px;font-weight:900;">
+					CLYN<span style="color: #4CCEE8;">STUDENT</span>
+				</div>
+										<h5 style="font-weight:100;font-size:15px;">@Copyright by Clyn<span>Project</span> - 2021</h5>
+				
+				<h5 style="font-weight:100;font-size:12px;">Contact Us via email: tritranminhh@gmail.com - lamchanhdai@gmail.com</h5>
+						<br>
+			</div>
+		</div>
+		<!--main container end-->
+	</div>
+	<!--wrapper end-->
+</div>
+</div>
+<script type="text/javascript">
+		$(document).ready(function() {
+			$(".sidebar-btn").click(function() {
+				$(".wrapper").toggleClass("collapse");
+			});
+		});
+	</script>
+</body>
+</html>

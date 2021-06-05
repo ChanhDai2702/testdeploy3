@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Đăng ký học phần</title>
+<link rel="stylesheet" th:href="@{/css/style2.css}" type="text/css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+	charset="utf-8"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type='text/javascript'
+	src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'>
+	
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('input[type=radio]').change(function() {
+			$("form[name='formMH&HP']").submit();
+
+		});
+	});
+	function test(url) {
+		window.location = url.toString();
+
+	}
+</script>
+
+</head>
+<body>
+	<div class="container">
+		<!--wrapper start-->
+		<div class="wrapper">
+			<!--header menu start-->
+			<div class="header">
+				<div class="header-menu">
+					<div class="title">
+						Clyn<span>Student</span>
+					</div>
+					<div class="sidebar-btn">
+						<i class="fas fa-bars"></i>
+					</div>
+					<ul>
+						<li><a href="#"><i class="fas fa-search"></i></a></li>
+						<li><a href="#"><i class="fas fa-bell"></i></a></li>
+						<li><a href="#"><i class="fas fa-power-off"></i></a></li>
+						<li><a class="dropdown-item"
+							th:attr="href='/j_spring_security_logout'">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+			<!--header menu end-->
+			<!--sidebar start-->
+			<div class="sidebar">
+				<div class="sidebar-menu">
+					<div class="profile" style="text-align: center">
+						<img th:src="@{/images/1.jpg}" alt="" />
+
+					</div>
+					<ul>
+						<li class="item"><a href="#" class="menu-btn"> <i
+								class="fas fa-desktop"></i><span>Dashboard</span>
+						</a></li>
+						<li class="item" id="profile"><a href="#profile"
+							class="menu-btn"> <i class="fas fa-user-circle"></i><span>Thông
+									tin cá nhân <i class="fas fa-chevron-down drop-down"></i>
+							</span>
+						</a>
+							<div class="sub-menu">
+								<a href="#"><i class="fas fa-image"></i><span>Picture</span></a>
+								<a href="#"><i class="fas fa-address-card"></i><span>Info</span></a>
+							</div></li>
+						<li class="item" id="messages"><a href="#messages"
+							class="menu-btn"> <i class="fas fa-envelope"></i><span>Email
+									<i class="fas fa-chevron-down drop-down"></i>
+							</span>
+						</a>
+							<div class="sub-menu">
+								<a href="#"><i class="fas fa-envelope"></i><span>New</span></a>
+								<a href="#"><i class="fas fa-envelope-square"></i><span>Sent</span></a>
+								<a href="#"><i class="fas fa-exclamation-circle"></i><span>Spam</span></a>
+							</div></li>
+						<li class="item" id="settings"><a href="#settings"
+							class="menu-btn"> <i class="fas fa-cog"></i><span>Thiết
+									lập <i class="fas fa-chevron-down drop-down"></i>
+							</span>
+						</a>
+							<div class="sub-menu">
+								<a href="#"><i class="fas fa-lock"></i><span>Password</span></a>
+								<a href="#"><i class="fas fa-language"></i><span>Language</span></a>
+							</div></li>
+						<li class="item"><a href="#" class="menu-btn"> <i
+								class="fas fa-info-circle"></i><span>About</span>
+						</a></li>
+					</ul>
+				</div>
+			</div>
+			<!--sidebar end-->
+			<div>
+				<!--main container start-->
+				<div class="main-container">
+					
+						
+
+						<div class="card">
+							<table id="xemDiem_aaa"
+		class="table-custom table table-bordered text-center" width="100%">
+		<thead>
+			<tr>
+				<th rowspan="3" style="width: 100px !important">
+					<div>STT</div>
+				</th>
+				<th rowspan="3" style="width: 200px !important">
+					<div>M&#227; lớp học phần</div>
+				</th>
+				<th rowspan="3" style="width: 200px !important">
+					<div>Tên môn học/học phần</div>
+				</th>
+				<th rowspan="3" style="width: 100px !important">
+					<div>Số tín chỉ</div>
+				</th>
+				<th colspan="5">Thường xuyên</th>
+				<th rowspan="3">Giữa kỳ</th>
+
+				<th rowspan="3">Cuối kỳ</th>
+				<th rowspan="3">Điểm<br />tổng kết
+				</th>
+				<th rowspan="3">Thang<br />điểm 4
+				</th>
+				<th rowspan="3">Điểm<br />chữ
+				</th>
+				<th rowspan="3">Xếp loại</th>
+
+			</tr>
+			<tr>
+				<th colspan="5">LT Hệ số 1</th>
+
+			</tr>
+			<tr>
+				<th>1</th>
+				<th>2</th>
+				<th>3</th>
+				<th>4</th>
+				<th>5</th>
+			</tr>
+		</thead>
+		<tbody th:each="diem,state:${dsbd}">
+
+			<tr role="row" class="odd" data-dt-row="0" style="height: 30px;">
+				<td colspan="21" class="text-left row-head" data-dt-row="0"
+					data-dt-column="0" th:utext="${diem.hocky+' '+diem.nienkhoa}">
+				</td>
+			</tr>
+			<tr th:each="diemtp,state1 : ${diem.dsBangDiems}">
+				<td  style="width: 100px !important;padding-left: 3%;">
+				<div style=""
+						th:utext="${state1.count}"></div></td>
+				<td style="width: 200px !important;padding-left: 3%">
+					<div style="" th:utext="${diemtp.lopHocPhan.malophp}"></div>
+				</td>
+				<td style="width: 200px !important;padding-left: 2%" class="text-left"><div
+						style="word-break: break-word;" th:utext="${diemtp.monHoc.tenmon}"></div></td>
+				<td style="width: 100px !important;padding-left: 3%"><div
+						style="display: inline-table" th:utext=${diemtp.monHoc.sotinchi}></div></td>
+				<td class="" style="padding-left: 1%;" title="DiemHeSo11" th:utext="${diemtp?.tk1}"></td>
+				<td class="" style="padding-left: 1%;"title="DiemHeSo12" th:utext="${diemtp?.tk2}"></td>
+				<td class="" style="padding-left: 1%;" title="DiemHeSo13" th:utext="${diemtp?.tk3}"></td>
+				<td class="" style="padding-left: 1%;" title="DiemHeSo14" th:utext="${diemtp?.tk4}"></td>
+				<td class="" style="padding-left: 1%;" title="DiemHeSo15" th:utext="${diemtp?.tk5}"></td>
+				<td class="" style="padding-left: 3%;" title="DiemThiGK" th:utext="${diemtp?.giuaky}"></td>
+				<td class="" style="padding-left: 3%;"title="DiemThiCK" th:utext="${diemtp?.cuoiky}"></td>
+				<td class="" style="padding-left: 3%;" title="DiemTongKet" th:utext="${diemtp?.dtb_10}"></td>
+				<td class="" style="padding-left: 3%;" title="DiemTinChi" th:utext="${diemtp?.dtb_4}"></td>
+				<td class="" style="padding-left: 3%;" title="DiemChu" th:utext="${diemtp?.dtb_chu}"></td>
+				<td class="" style="padding-left: 3%;" title="XepLoai" th:utext="${diemtp?.xeploai}"></td>
+			</tr>
+			<tr role="row" class="odd" data-dt-row="0" style="height: 30px;">
+				<td colspan="5" class="text-left row-head" data-dt-row="0"
+					data-dt-column="0" th:utext="'Điểm trung bình học kỳ (Hệ số 10): ' +${diem.dtb_10}">
+				</td>
+			</tr>
+			<tr role="row" class="odd" data-dt-row="0" style="height: 30px;">
+				<td colspan="5" class="text-left row-head" data-dt-row="0"
+					data-dt-column="0" th:utext="'Điểm trung bình học kỳ (Hệ số 4): ' +${diem.dtb_4}">
+				</td>
+			</tr>
+			<tfoot th:object=${tichluy}>
+			<tr role="row" class="odd" data-dt-row="0" style="height: 30px;">
+				<td colspan="5" class="text-left row-head" data-dt-row="0"
+					data-dt-column="0" th:utext="'Tổng kết: '">
+				</td>
+			</tr>
+			<tr role="row" class="odd" data-dt-row="0" style="height: 30px;">
+				<td colspan="30" class="text-left row-head" data-dt-row="0"
+					data-dt-column="0" th:utext="'Điểm trung bình tích lũy (Hệ số 10): ' +${tichluy.dtl_10}">
+				</td>
+			</tr>
+			<tr role="row" class="odd" data-dt-row="0" style="height: 30px;">
+				<td colspan="30" class="text-left row-head" data-dt-row="0"
+					data-dt-column="0" th:utext="'Điểm trung bình tích lũy (Hệ số 4): ' +${tichluy.dtl_4}">
+				</td>
+			</tr>
+			</tfoot>
+		</tbody>
+	</table>
+				</div>
+				<!--main container end-->
+			</div>
+			<!--wrapper end-->
+		</div>
+	</div>
+</body>
+</html>

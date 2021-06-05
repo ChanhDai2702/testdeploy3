@@ -1,0 +1,72 @@
+span{
+	text-align:center;
+	font-size:10px;
+}
+.container {
+    background: rgb(79, 79, 143); 
+    height: 100%;
+    width: 100%;
+}
+.vertical-center {
+    margin: auto;
+    height: 100%;
+    width: 100%;
+    transform: translateY(20%);
+  }
+.user_card {
+    height: 65%;
+    width: 30%;
+    background: white;
+    justify-content: center;
+    margin: auto;
+}
+.input-group{
+    width: 100%;
+    padding-top: 2%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.top-form{
+    width: 100%;
+    padding-top: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+input{
+    width: 100%;
+    height: 40px;
+}
+.input-text{
+    width: 100%;
+    padding-top: 7%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.sign_btn {
+    width: 50%;
+    background: #22B2E0;
+    color: rgb(255, 255, 255);
+}
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+    background-color: #22B2E0;
+}
+.title_form{
+	text-align:center;
+    color: black;
+}
+.login_form{
+	
+    color:white ;
+    margin-bottom: 15%;
+}
+a:link:hover{
+    text-decoration:none;
+    color: red;
+}
+.nameError,.passwordError{
+    color:black;
+        width: 100%;
+        overflow: hidden;
+        margin-bottom: 5%;
+        text-overflow: ellipsis;
+}

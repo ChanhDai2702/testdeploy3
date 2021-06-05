@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	layout:decorator="layout">
+<head>
+<title>My Login Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<style>
+		a {
+			text-align: center;
+		}
+		h4 {
+			text-align: center;
+		}
+	</style>
+</head>
+<body class="container">
+	<img src="../static/images/404.png" width="1000"
+									th:src="@{images/404.png}" class="brand_logo" alt="Logo" />
+	<br/>
+	<h4>
+		<a th:href="@{/}">turn back home page</a>
+	</h4>
+</body>
+</html>

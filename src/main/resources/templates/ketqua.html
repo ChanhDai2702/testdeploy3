@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kết quả học tập</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+
+
+
+
+
+
+</head>
+
+<body>
+
+	<table id="xemDiem_aaa"
+		class="table-custom table table-bordered text-center" width="100%">
+		<thead>
+			<tr>
+				<th rowspan="3" style="width: 100px !important">
+					<div>STT</div>
+				</th>
+				<th rowspan="3" style="width: 200px !important">
+					<div>M&#227; lớp học phần</div>
+				</th>
+				<th rowspan="3" style="width: 200px !important">
+					<div>Tên môn học/học phần</div>
+				</th>
+				<th rowspan="3" style="width: 100px !important">
+					<div>Số tín chỉ</div>
+				</th>
+				<th colspan="5">Thường xuyên</th>
+				<th rowspan="3">Giữa kỳ</th>
+
+				<th rowspan="3">Cuối kỳ</th>
+				<th rowspan="3">Điểm<br />tổng kết
+				</th>
+				<th rowspan="3">Thang<br />điểm 4
+				</th>
+				<th rowspan="3">Điểm<br />chữ
+				</th>
+				<th rowspan="3">Xếp loại</th>
+
+			</tr>
+			<tr>
+				<th colspan="5">LT Hệ số 1</th>
+
+			</tr>
+			<tr>
+				<th>1</th>
+				<th>2</th>
+				<th>3</th>
+				<th>4</th>
+				<th>5</th>
+			</tr>
+		</thead>
+		<tbody th:each="diem,state:${dsbd}">
+
+			<tr role="row" class="odd" data-dt-row="0" style="height: 30px;">
+				<td colspan="21" class="text-left row-head" data-dt-row="0"
+					data-dt-column="0" th:utext="${diem.hocky+' '+diem.nienkhoa}">
+				</td>
+			</tr>
+			<tr th:each="diemtp,state1 : ${diem.dsBangDiems}">
+				<td style="width: 100px !important"><div style=""
+						th:utext="${state1.count}"></div></td>
+				<td style="width: 200px !important">
+					<div style="" th:utext="${diemtp.lopHocPhan.malophp}"></div>
+				</td>
+				<td style="width: 200px !important" class="text-left"><div
+						style="word-break: break-word;" th:utext="${diemtp.monHoc.tenmon}"></div></td>
+				<td style="width: 100px !important"><div
+						style="display: inline-table" th:utext=${diemtp.monHoc.sotinchi}></div></td>
+				<td class="" title="DiemHeSo11" th:utext="${diemtp?.tk1}"></td>
+				<td class="" title="DiemHeSo12" th:utext="${diemtp?.tk2}"></td>
+				<td class="" title="DiemHeSo13" th:utext="${diemtp?.tk3}"></td>
+				<td class="" title="DiemHeSo14" th:utext="${diemtp?.tk4}"></td>
+				<td class="" title="DiemHeSo15" th:utext="${diemtp?.tk5}"></td>
+				<td class="" title="DiemThiGK" th:utext="${diemtp?.giuaky}"></td>
+				<td class="" title="DiemThiCK" th:utext="${diemtp?.cuoiky}"></td>
+				<td class="" title="DiemTongKet" th:utext="${diemtp?.dtb_10}"></td>
+				<td class="" title="DiemTinChi" th:utext="${diemtp?.dtb_4}"></td>
+				<td class="" title="DiemChu" th:utext="${diemtp?.dtb_chu}"></td>
+				<td class="" title="XepLoai" th:utext="${diemtp?.xeploai}"></td>
+			</tr>
+			<tr role="row" class="odd" data-dt-row="0" style="height: 30px;">
+				<td colspan="5" class="text-left row-head" data-dt-row="0"
+					data-dt-column="0" th:utext="'Điểm trung bình học kỳ (Hệ số 10): ' +${diem.dtb_10}">
+				</td>
+			</tr>
+			<tr role="row" class="odd" data-dt-row="0" style="height: 30px;">
+				<td colspan="5" class="text-left row-head" data-dt-row="0"
+					data-dt-column="0" th:utext="'Điểm trung bình học kỳ (Hệ số 4): ' +${diem.dtb_4}">
+				</td>
+			</tr>
+			<tfoot th:object=${tichluy}>
+			<tr role="row" class="odd" data-dt-row="0" style="height: 30px;">
+				<td colspan="5" class="text-left row-head" data-dt-row="0"
+					data-dt-column="0" th:utext="'Tổng kết: '">
+				</td>
+			</tr>
+			<tr role="row" class="odd" data-dt-row="0" style="height: 30px;">
+				<td colspan="30" class="text-left row-head" data-dt-row="0"
+					data-dt-column="0" th:utext="'Điểm trung bình tích lũy (Hệ số 10): ' +${tichluy.dtl_10}">
+				</td>
+			</tr>
+			<tr role="row" class="odd" data-dt-row="0" style="height: 30px;">
+				<td colspan="30" class="text-left row-head" data-dt-row="0"
+					data-dt-column="0" th:utext="'Điểm trung bình tích lũy (Hệ số 4): ' +${tichluy.dtl_4}">
+				</td>
+			</tr>
+			</tfoot>
+		</tbody>
+	</table>
+
+
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="SpringBootJPA">
+		<class>com.example.demo.model.BangDiem</class>
+		<class>com.example.demo.model.DiemThanhPhan</class>
+		<class>com.example.demo.model.ChuyenNganh</class>
+		<class>com.example.demo.model.DangKyLopHocPhan</class>
+		<class>com.example.demo.model.GiangVien</class>
+		<class>com.example.demo.model.Khoa</class>
+		<class>com.example.demo.model.LopHoc</class>
+		<class>com.example.demo.model.LopHocPhan</class>
+		<class>com.example.demo.model.MonHoc</class>
+		<class>com.example.demo.model.Phong</class>
+		<class>com.example.demo.model.QuanLy</class>
+		<class>com.example.demo.model.SinhVien</class>
+		<class>com.example.demo.model.TaiKhoan</class>
+		<class>com.example.demo.model.LichHoc</class>
+		<class>com.example.demo.model.LichThi</class>
+		<class>com.example.demo.model.HocKy</class>
+		<class>com.example.demo.model.NienKhoa</class>
+		<properties>
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.SQLServerDialect" />
+			<property name="hibernate.connection.url"
+				value="jdbc:sqlserver://localhost:1433;databaseName=test1" />
+			<property name="hibernate.connection.driver_class"
+				value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+			<property name="hibernate.connection.username" value="sa" />
+			<property name="hibernate.connection.password"
+				value="sapassword" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+		</properties>
+	</persistence-unit>
+</persistence>

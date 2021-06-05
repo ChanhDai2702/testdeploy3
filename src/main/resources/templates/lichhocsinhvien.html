@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Lịch học theo tuần</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+	charset="utf-8"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type='text/javascript'
+	src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'>
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css"
+	rel="stylesheet" />
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css"
+	rel="stylesheet" />
+<script type="text/javascript">
+
+ $(document).ready(function() { 
+	   $('input[type=radio]').change(function(){
+	        $("form[name='formMH&HP']").submit();
+	   });
+	  });
+ $(document).ready(function () {
+
+     $('#calendar').fullCalendar({
+         header: {
+             left: 'prev,next today',
+             center: 'title',
+             right: 'basicWeek'
+         },
+         defaultDate: Date.now(),
+         navLinks: true, // can click day/week names to navigate views
+         defaultView: 'basicWeek',
+         editable: true,
+         
+         eventLimit: true, // allow "more" link when too many events
+         events: [
+
+         ]
+     });
+
+ });
+ </script>
+
+</head>
+<body>
+
+	<!--wrapper start-->
+	<div class="wrapper">
+		<!--header menu start-->
+		<div class="header">
+			<div class="header-menu">
+				<div class="title">
+					Clyn<span>Student</span>
+				</div>
+				<div class="sidebar-btn">
+					<i class="fas fa-bars"></i>
+				</div>
+				<ul>
+					<li><a href="#"><i class="fas fa-search"></i></a></li>
+					<li><a href="#"><i class="fas fa-bell"></i></a></li>
+					<li><a href="#"><i class="fas fa-power-off"></i></a></li>
+				</ul>
+			</div>
+		</div>
+		<!--header menu end-->
+		<!--sidebar start-->
+		<div class="sidebar">
+			<div class="sidebar-menu">
+				<div class="profile" style="text-align: center">
+					<img th:src="@{/images/1.jpg}" alt="" />
+					<p th:utext="${sv.masv}"></p>
+					<p th:utext="${sv.tensv}"></p>
+				</div>
+				<ul>
+					<li class="item"><a href="#" class="menu-btn"> <i
+							class="fas fa-desktop"></i><span>Dashboard</span>
+					</a></li>
+					<li class="item" id="profile"><a href="#profile"
+						class="menu-btn"> <i class="fas fa-user-circle"></i><span>Thông tin cá nhân
+								<i class="fas fa-chevron-down drop-down"></i>
+						</span>
+					</a>
+						<div class="sub-menu">
+							<a href="#"><i class="fas fa-image"></i><span>Picture</span></a>
+							<a href="#"><i class="fas fa-address-card"></i><span>Info</span></a>
+						</div></li>
+					<li class="item" id="messages"><a href="#messages"
+						class="menu-btn"> <i class="fas fa-envelope"></i><span>Email
+								<i class="fas fa-chevron-down drop-down"></i>
+						</span>
+					</a>
+						<div class="sub-menu">
+							<a href="#"><i class="fas fa-envelope"></i><span>New</span></a> <a
+								href="#"><i class="fas fa-envelope-square"></i><span>Sent</span></a>
+							<a href="#"><i class="fas fa-exclamation-circle"></i><span>Spam</span></a>
+						</div></li>
+					<li class="item" id="settings"><a href="#settings"
+						class="menu-btn"> <i class="fas fa-cog"></i><span>Thiết lập
+								<i class="fas fa-chevron-down drop-down"></i>
+						</span>
+					</a>
+						<div class="sub-menu">
+							<a href="#"><i class="fas fa-lock"></i><span>Password</span></a>
+							<a href="#"><i class="fas fa-language"></i><span>Language</span></a>
+						</div></li>
+					<li class="item"><a href="#" class="menu-btn"> <i
+							class="fas fa-info-circle"></i><span>About</span>
+					</a></li>
+				</ul>
+			</div>
+		</div>
+		<!--sidebar end-->
+		<!--main container start-->
+		<div class="main-container">
+
+
+
+	<div class="card">
+		<div class="ui container" style="width:100%">
+				<br />
+
+				<div class="ui container" style="width:100%">
+
+					<div class="ui grid" >
+						<div class="ui sixteen column">
+							<h1 style="text-align: center; margin-left: 7%;">Lịch học
+								theo tuần</h1>
+							<div id="calendar"></div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+	</div>
+
+		
+		</div>
+		<!--main container end-->
+	</div>
+	<!--wrapper end-->
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(".sidebar-btn").click(function() {
+				$(".wrapper").toggleClass("collapse");
+			});
+		});
+	</script>
+</body>
+</html>

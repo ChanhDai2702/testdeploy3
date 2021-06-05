@@ -1,0 +1,131 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Đăng Nhập</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="./vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="./fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="./fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+
+<link rel="stylesheet" type="text/css" href="./css/logins/util.css">
+<link rel="stylesheet" type="text/css" href="./css/logins/login.css">
+
+<script
+	src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.0/dist/sweetalert2.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.0/dist/sweetalert2.css">
+</head>
+<script>
+	
+	function KiemTraForm(){
+		 	var regPass =/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+	        var regtentaikhoan = /^[a-z][a-z0-9_\.]{2,32}$/;
+	        var regLeight =/[a-zA-Z0-9]{6,}/;
+	        var valiName = true;
+	        var valiPass = true;
+	        if($('#tentaikhoan').val().trim()==''){
+	            $('#div-UserName').text('Tên tài khoản không được để trống');
+	            valiName  = false;
+	        }
+	        else if(!regtentaikhoan.exec($('#tentaikhoan').val())){
+	            $('#div-UserName').text('Tên tài khoản không hợp lệ');
+	            valiName  = false;
+	        }
+	        else{
+	            $('#div-UserName').text('');
+	            valiName  = true;
+	        }
+	        if ($('#matkhau').val().trim()==''){
+	            $('#div-Password').text('Mật khẩu không được để trống');
+	            valiPass = false;
+	        }
+	        else if(!regLeightexec($('#matkhau').val().trim())){
+	        	$('#div-Password').text('Mật khẩu không đúng định dạng');
+	 	    	valiPass = false;
+	        }
+	        //else if(!regPass.exec($('#passwordHash').val())){
+	        //    $('#div-Password').text('Password không đúng định dạng');
+	        //    valiPass = false;
+	        //}
+	        else{
+	            $('#div-Password').text('');
+	            valiPass = true;
+	        }
+	        if(valiPass==true && valiName==true){
+	            return true;
+	        }else{
+	            return false;
+	        }
+	}
+</script>
+<body>
+
+	<div class="limiter">
+		<div class="container-login100"
+			style="background-image: url('./images/bg-01.jpg');">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+				<form class="login100-form validate-form"
+					th:action="@{/j_spring_security_login}" method="post">
+					<span class="login100-form-title p-b-49"> Đăng Nhập </span>
+					<div class="wrap-input100" th:if="${param.error}">
+						<p class="text-danger"
+							th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}">
+							[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+					</div>
+					<div class="wrap-input100 validate-input m-b-23"
+						data-validate="Yêu cầu nhập tài khoản">
+						<span id="div-UserName" class="text-danger"
+							style="font-size: 14px;"></span> <br /> <span
+							class="label-input100">Tài khoản</span> <input class="input100"
+							type="text" name="tentaikhoan" id="tentaikhoan" placeholder="Nhập tài khoản">
+						<span class="focus-input100" data-symbol="&#xf206;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input"
+						data-validate="Yêu cầu nhập mật khẩu">
+						<span id="div-Password" class="text-danger"
+							style="font-size: 14px;"></span> <br /> <span
+							class="label-input100">Mật khẩu</span> <input class="input100"
+							type="password" name="matkhau" id="matkhau"
+							placeholder="Nhập mật khẩu"> <span class="focus-input100"
+							data-symbol="&#xf190;"></span>
+					</div>
+
+					<input hidden=true type="checkbox" checked="checked"
+						name="remember-me" />
+
+					<div class="text-right p-t-8 p-b-31">
+						<a href="/forgot_password"> Quên mật khẩu? </a>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn" type="submit"
+								onclick="return KiemTraForm()">Đăng Nhập</button>
+						</div>
+					</div>	
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!--===============================================================================================-->
+	<script src="./vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+
+
+
+</body>
+</html>

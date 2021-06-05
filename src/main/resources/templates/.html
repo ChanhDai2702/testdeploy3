@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Đăng ký học phần</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+	charset="utf-8"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type='text/javascript'
+	src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'>
+	
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('input[type=radio]').change(function() {
+			$("form[name='formMH&HP']").submit();
+
+		});
+	});
+	function test(url) {
+		window.location = url.toString();
+
+	}
+</script>
+
+</head>
+<body>
+	<div class="container">
+		<!--wrapper start-->
+		<div class="wrapper">
+			<!--header menu start-->
+			<div class="header">
+				<div class="header-menu">
+					<div class="title">
+						Clyn<span>Student</span>
+					</div>
+					<div class="sidebar-btn">
+						<i class="fas fa-bars"></i>
+					</div>
+					<ul>
+						<li><a href="#"><i class="fas fa-search"></i></a></li>
+						<li><a href="#"><i class="fas fa-bell"></i></a></li>
+						<li><a href="#"><i class="fas fa-power-off"></i></a></li>
+						<li><a class="dropdown-item"
+							th:attr="href='/j_spring_security_logout'">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+			<!--header menu end-->
+			<!--sidebar start-->
+			<div class="sidebar">
+				<div class="sidebar-menu">
+					<div class="profile" style="text-align: center">
+						<img th:src="@{/images/1.jpg}" alt="" />
+
+					</div>
+					<ul>
+						<li class="item"><a href="#" class="menu-btn"> <i
+								class="fas fa-desktop"></i><span>Dashboard</span>
+						</a></li>
+						<li class="item" id="profile"><a href="#profile"
+							class="menu-btn"> <i class="fas fa-user-circle"></i><span>Thông
+									tin cá nhân <i class="fas fa-chevron-down drop-down"></i>
+							</span>
+						</a>
+							<div class="sub-menu">
+								<a href="#"><i class="fas fa-image"></i><span>Picture</span></a>
+								<a href="#"><i class="fas fa-address-card"></i><span>Info</span></a>
+							</div></li>
+						<li class="item" id="messages"><a href="#messages"
+							class="menu-btn"> <i class="fas fa-envelope"></i><span>Email
+									<i class="fas fa-chevron-down drop-down"></i>
+							</span>
+						</a>
+							<div class="sub-menu">
+								<a href="#"><i class="fas fa-envelope"></i><span>New</span></a>
+								<a href="#"><i class="fas fa-envelope-square"></i><span>Sent</span></a>
+								<a href="#"><i class="fas fa-exclamation-circle"></i><span>Spam</span></a>
+							</div></li>
+						<li class="item" id="settings"><a href="#settings"
+							class="menu-btn"> <i class="fas fa-cog"></i><span>Thiết
+									lập <i class="fas fa-chevron-down drop-down"></i>
+							</span>
+						</a>
+							<div class="sub-menu">
+								<a href="#"><i class="fas fa-lock"></i><span>Password</span></a>
+								<a href="#"><i class="fas fa-language"></i><span>Language</span></a>
+							</div></li>
+						<li class="item"><a href="#" class="menu-btn"> <i
+								class="fas fa-info-circle"></i><span>About</span>
+						</a></li>
+					</ul>
+				</div>
+			</div>
+			<!--sidebar end-->
+			<div>
+				<!--main container start-->
+				<div class="main-container">
+					<form th:object=${listNienKhoa} th:method="post"
+						th:action="@{getlichday_hk}" name="formMH&HP">
+
+						<div class="card">
+							<div>
+							<h1 style="font-weight: normal; font-size: 32px;"
+										th:utext="${'Danh sách sinh viên lớp: '+lhp?.tenlophp 
+										+'<br>'+ 'Mã lớp :'+ lhp?.malophp
+										+'<br>'+ 'Môn :'+ lhp?.monHoc.tenmon }"></h1>
+								
+							</div>
+
+							<br> <br>
+							<table class="content-table">
+								<thead>
+									<tr>
+
+										<th>STT</th>
+										<th>Mã lớp học phần</th>
+										<th>Tên môn học</th>
+										<th>Môn học</th>
+										<th>Niên khóa</th>
+										<th>Số học sinh đã đăng kí</th>
+										<th>Trạng thái</th>
+										<th>Xem danh sách sinh viên</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="lhp,state :${listlhp}">
+										<td th:utext="${state?.count}"></td>
+										<td th:utext="${lhp?.malophp}"></td>
+										<td th:utext="${lhp?.tenlophp}"></td>
+										<td th:utext="${lhp?.monHoc.tenmon}"></td>
+										<td
+											th:utext="${lhp?.nienkhoa.hocKy.loaiHocKy+'(' +lhp?.nienkhoa.khoa +')'}"></td>
+										<td th:utext="${lhp?.siso}"></td>
+										<td th:utext="${lhp?.trangthai}"></td>
+										<td><a class="link_form btn"
+											style="display: block; font-size: 20px;"
+											th:href="@{/danhsachSV?idlhp={idlhp}(idlhp=${lhp?.malophp})}">Xem</a></td>
+											
+											
+				
+											
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+					</form>
+				</div>
+				<!--main container end-->
+			</div>
+			<!--wrapper end-->
+		</div>
+	</div>
+</body>
+</html>
